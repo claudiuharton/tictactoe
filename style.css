@@ -1,0 +1,46 @@
+
+body{
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+}
+
+.box{
+    background-color: gray;
+    font-size: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    -webkit-user-select: none;  /* Chrome all / Safari all */
+    -moz-user-select: none;     /* Firefox all */
+    -ms-user-select: none;      /* IE 10+ */
+    user-select: none;          /* Likely future */
+
+}
+
+.tictactoe{
+    padding: 20px;
+    width: 500px;
+    display: grid;
+    grid-gap: 20px;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: minmax(20vh, auto);
+
+
+}
+
+.message{
+    padding: 20px;
+    font-size: xx-large;
+    color: aliceblue;
+}
+button{
+    width:150px;
+    height: 75px;
+    font-size: xx-large;
+
+
+}
