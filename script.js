@@ -1,13 +1,13 @@
 let game = {
-    flag:false,
+    flag: false,
     noClicks: 0,
-    matrix: [[null, null, null], [null, null, null], [null, null, null]],
+    matrix: [[``, ``, ``], [``, ``, ``], [``, ``, ``]],
 
 
     message: {
         winX: "Good job X!",
         win0: "Good job 0!",
-        draw: "HAHAHA"
+        draw: "It's a draw!"
     },
 
     selectorRef: (i, j) => {
@@ -22,9 +22,10 @@ let game = {
     areEqual: (...arguments) => {
         let len = arguments.length;
         for (let i = 1; i < len; i++) {
-            if (arguments[i] === null || arguments[i] !== arguments[i - 1])
+            if (arguments[i] === `` || arguments[i] !== arguments[i - 1])
                 return false;
         }
+
         return true;
     }
     ,
@@ -32,32 +33,53 @@ let game = {
 
 
         if (game.areEqual(game.matrix[0][0], game.matrix[1][1], game.matrix[2][2])) {
-            game.selectorRef(0,0).style.color = 'red';
-            game.selectorRef(1,1).style.color = 'red';
-            game.selectorRef(2,2).style.color = 'red';
+            game.selectorRef(0, 0).style.color = 'red';
+            game.selectorRef(1, 1).style.color = 'red';
+            game.selectorRef(2, 2).style.color = 'red';
             return game.matrix[0][0];
         }
         if (game.areEqual(game.matrix[0][2], game.matrix[1][1], game.matrix[2][0])) {
+            game.selectorRef(0, 2).style.color = 'red';
+            game.selectorRef(1, 1).style.color = 'red';
+            game.selectorRef(2, 0).style.color = 'red';
             return game.matrix[0][2];
         }
         if (game.areEqual(game.matrix[0][0], game.matrix[0][1], game.matrix[0][2])) {
+            game.selectorRef(0, 0).style.color = 'red';
+            game.selectorRef(0, 1).style.color = 'red';
+            game.selectorRef(0, 2).style.color = 'red';
             return game.matrix[0][0];
         }
 
-        if (game.areEqual(game.matrix[1][0], game.matrix[1][1], game.matrix[1][2])) {
+        if (game.areEqual(game.matrix[1][0], game.matrix[1][1], game.matrix[1][2]) ) {
+            game.selectorRef(1, 1).style.color = 'red';
+            game.selectorRef(1, 0).style.color = 'red';
+            game.selectorRef(1, 2).style.color = 'red';
             return game.matrix[1][0];
         }
 
         if (game.areEqual(game.matrix[2][0], game.matrix[2][1], game.matrix[2][2])) {
+            game.selectorRef(2, 0).style.color = 'red';
+            game.selectorRef(2, 1).style.color = 'red';
+            game.selectorRef(2, 2).style.color = 'red';
             return game.matrix[2][0];
         }
         if (game.areEqual(game.matrix[0][0], game.matrix[1][0], game.matrix[2][0])) {
+            game.selectorRef(0, 0).style.color = 'red';
+            game.selectorRef(1, 0).style.color = 'red';
+            game.selectorRef(2, 0).style.color = 'red';
             return game.matrix[0][0];
         }
         if (game.areEqual(game.matrix[0][1], game.matrix[1][1], game.matrix[2][1])) {
+            game.selectorRef(0, 1).style.color = 'red';
+            game.selectorRef(1, 1).style.color = 'red';
+            game.selectorRef(2, 1).style.color = 'red';
             return game.matrix[0][1];
         }
         if (game.areEqual(game.matrix[0][2], game.matrix[1][2], game.matrix[2][2])) {
+            game.selectorRef(0, 2).style.color = 'red';
+            game.selectorRef(1, 2).style.color = 'red';
+            game.selectorRef(2, 2).style.color = 'red';
             return game.matrix[0][2];
         }
 
@@ -67,7 +89,7 @@ let game = {
     canContinue: () => {
         for (let i = 0; i < 3; i++)
             for (let j = 0; j < 3; j++) {
-                if (game.matrix[i][j] === null)
+                if (game.matrix[i][j].length===0)
                     return true;
             }
         return false;
@@ -77,12 +99,12 @@ let game = {
 };
 
 
-if (game.flag) {
-    window.addEventListener('click', (event) => {
+window.addEventListener('click', (event) => {
+    if (game.flag) {
         if (event.target.className.indexOf(`box`) !== -1) {
             let box = event.target.className.split('');
 
-            if (game.canContinue() && game.matrix[parseInt(box[1])][parseInt(box[2])] === null) {
+            if (game.canContinue() && game.matrix[parseInt(box[1])][parseInt(box[2])].length === 0) {
 
                 if (game.noClicks % 2 === 0) {
 
@@ -103,7 +125,7 @@ if (game.flag) {
                         for (let i = 0; i < ele.length; i++) {
                             ele[i].style.backgroundColor = 'grey';
                         }
-                        game.flag=false;
+                        game.flag = false;
                         break;
                     case '0':
                         document.querySelector('.message').innerHTML = game.message.win0;
@@ -111,7 +133,7 @@ if (game.flag) {
                         for (let i = 0; i < ele.length; i++) {
                             ele[i].style.backgroundColor = 'grey';
                         }
-                        game.flag=false;
+                        game.flag = false;
                         break;
                     case null:
                         if (!game.canContinue()) {
@@ -119,7 +141,7 @@ if (game.flag) {
                             for (let i = 0; i < ele.length; i++) {
                                 ele[i].style.backgroundColor = 'grey';
                             }
-                            game.flag=false;
+                            game.flag = false;
                         }
 
 
@@ -133,46 +155,46 @@ if (game.flag) {
                     for (let i = 0; i < ele.length; i++) {
                         ele[i].style.backgroundColor = 'grey';
                     }
-                    game.flag=false;
+                    game.flag = false;
                 }
             }
         }
-    });
+    }
 
-}
+});
+
 
 window.addEventListener('click', (event) => {
     if (event.target.className === 'button') {
         let ele = document.getElementsByClassName('box');
         if (document.querySelector('.button').innerHTML === 'RESET') {
 
-game.flag=true;
+            game.flag = true;
             for (let i = 0; i < ele.length; i++) {
                 ele[i].style.backgroundColor = 'aliceblue';
-                ele[i].style.color='black';
+                ele[i].style.color = 'black';
             }
 
-            game.noClicks=0;
-            game.matrix = [[null, null, null], [null, null, null], [null, null, null]];
+            game.noClicks = 0;
+            game.matrix = [[``, ``, ``], [``, ``, ``], [``, ``, ``]];
 
-            for (let i=0;i<3;i++)
-                for(let j =0;j<3;j++){
-                    game.addXor0('',i,j);
+            for (let i = 0; i < 3; i++)
+                for (let j = 0; j < 3; j++) {
+                    game.addXor0('', i, j);
                 }
             document.querySelector('.message').innerHTML = `Tic Tac Toe`;
 
 
         } else if (document.querySelector('.button').innerHTML === 'START') {
 
-game.flag=true;
+            game.flag = true;
             for (let i = 0; i < ele.length; i++) {
                 ele[i].style.backgroundColor = 'aliceblue';
+                ele[i].style.color = 'black';
             }
 
 
-
-
-                document.querySelector('button').innerHTML = 'RESET';
+            document.querySelector('button').innerHTML = 'RESET';
 
 
         }
